@@ -15,3 +15,24 @@ Route::get('/', function()
 {
 	return View::make('hello');
 });
+
+Route::get("/user", function()
+{
+  $user = new User;
+  $user->email = "aliens@turija.com";
+  $user->password = "tuk12345678";
+  $user->password_confirmation = "tuk12345678";
+
+  $user->save();
+
+  var_dump($user);
+});
+
+Route::get("/confession", function()
+{
+  $confession = new Confession(array("body" => "I, Robot."));
+  $user = User::find(1);
+  $user->confessions()->save($confession);
+
+  var_dump($confession);
+});
