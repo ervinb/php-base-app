@@ -2,9 +2,9 @@
 
 use LaravelBook\Ardent\Ardent;
 
-class Confession extends Ardent { 
+class Confession extends Ardent {
   protected $fillable = array("body");
-  
+
   public function user()
   {
     $this->belongsTo("User");

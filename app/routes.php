@@ -11,12 +11,14 @@
 |
 */
 
+Route::resource("user", "UsersController");
+
 Route::get('/', function()
 {
 	return View::make('hello');
 });
 
-Route::get("/user", function()
+Route::get("/mock_user", function()
 {
   $user = new User;
   $user->email = "aliens@turija.com";
