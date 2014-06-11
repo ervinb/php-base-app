@@ -11,7 +11,7 @@
 |
 */
 
-Route::resource("user", "UsersController");
+Route::resource("users", "UsersController");
 
 Route::get('/', function()
 {

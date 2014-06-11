@@ -1,13 +1,13 @@
 <?php
 
-use Codefessions\Storage\UserRepository as User;
-
-public function __construct(User $user)
-{
-  $this->user = $user;
-}
+use Codefessions\Storage\User\UserRepository as User;
 
 class UsersController extends BaseController {
+
+  public function __construct(User $user)
+  {
+    $this->user = $user;
+  }
 
   /**
    * Display a listing of the resource.
@@ -27,7 +27,7 @@ class UsersController extends BaseController {
    */
   public function create()
   {
-    //
+    return View::make("users.create");
   }
 
 
@@ -38,7 +38,17 @@ class UsersController extends BaseController {
    */
   public function store()
   {
-    //
+    $user = $this->user->create(Input::all());
+
+    if($user->isSaved())
+    {
+      return Redirect::route("users.index")
+        ->with("flash", "User created successfully!");
+    }
+
+    return Redirect::route("users.create")
+      ->withInput()
+      ->withErrors($user->errors());
   }
 
 
@@ -50,7 +60,7 @@ class UsersController extends BaseController {
    */
   public function show($id)
   {
-    //
+    return $this->user->find($id);
   }
 
 
@@ -62,7 +72,7 @@ class UsersController extends BaseController {
    */
   public function edit($id)
   {
-    //
+    return View::make("users.edit");
   }
 
 
@@ -74,7 +84,17 @@ class UsersController extends BaseController {
    */
   public function update($id)
   {
-    //
+    $user = $this->user->update($id);
+
+    if($user->isSaved())
+    {
+      return Redirect::to("users.show", $id)
+        ->with("flash", "User updated!");
+    }
+
+    return Redirect::to("users.edit", $id)
+      ->withInput()
+      ->withErrors($user->errors());
   }
 
 
@@ -88,6 +108,5 @@ class UsersController extends BaseController {
   {
     //
   }
-
 
 }
