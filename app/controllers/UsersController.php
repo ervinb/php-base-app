@@ -6,6 +6,8 @@ class UsersController extends BaseController {
 
   public function __construct(User $user)
   {
+    $this->beforeFilter('auth', array('except' => 'create'));
+
     $this->user = $user;
   }
 
@@ -88,11 +90,11 @@ class UsersController extends BaseController {
 
     if($user->isSaved())
     {
-      return Redirect::to("users.show", $id)
+      return Redirect::route("users.show", $id)
         ->with("flash", "User updated!");
     }
 
-    return Redirect::to("users.edit", $id)
+    return Redirect::route("users.edit", $id)
       ->withInput()
       ->withErrors($user->errors());
   }
@@ -106,7 +108,7 @@ class UsersController extends BaseController {
    */
   public function destroy($id)
   {
-    //
+    $this->user->delete($id);
   }
 
 }

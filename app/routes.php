@@ -38,3 +38,19 @@ Route::get("/confession", function()
 
   var_dump($confession);
 });
+
+Route::get('login', array(
+    'uses' => 'SessionController@create',
+      'as' => 'session.create'
+
+    ));
+Route::post('login', array(
+    'uses' => 'SessionController@store',
+      'as' => 'session.store'
+
+    ));
+Route::get('logout', array(
+    'uses' => 'SessionController@destroy',
+      'as' => 'session.destroy'
+
+));

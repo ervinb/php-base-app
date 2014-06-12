@@ -86,11 +86,11 @@ class UserControllerTest extends TestCase {
       ->once()
       ->andReturn(Mockery::mock(array(
                     "isSaved" => false,
-                    "errors" => array() 
+                    "errors" => array()
                   )));
 
     $this->call("PUT", "users/1");
-    
+
     $this->assertRedirectedToRoute("users.edit", 1);
     $this->assertSessionHasErrors();
   }
@@ -100,12 +100,22 @@ class UserControllerTest extends TestCase {
     $this->mock->shouldReceive("update")
       ->once()
       ->andReturn(Mockery::mock(array(
-                    "isSaved" => true 
+                    "isSaved" => true
                  )));
 
     $this->call("PUT", "users/1");
 
-    $this->assertRedirectedTo("users.show", 1);
+    $this->assertRedirectedToRoute("users.show", 1);
     $this->assertSessionHas("flash");
+  }
+
+  public function testDelete()
+  {
+    $this->mock->shouldReceive("delete");
+
+    $this->call("DELETE", "users/1");
+
+    $this->assertResponseOk();
+
   }
 }

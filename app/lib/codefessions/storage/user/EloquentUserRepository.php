@@ -27,4 +27,11 @@ class EloquentUserRepository implements UserRepository {
 
     return $user;
   }
+
+  public function delete($id)
+  {
+    $user = User::find($id);
+
+    return $user->delete();
+  }
 }
