@@ -23,4 +23,15 @@ class UserTest extends TestCase {
     $this->assertEquals($errors[0], "The email field is required.");
   }
 
+  public function testUserCreation()
+  {
+    $user = new User;
+    $user->email = "dev@gmail.com";
+    $user->password = "password";
+    $user->password_confirmation = "password";
+
+    $this->assertTrue($user->save());
+  }
+
+
 }

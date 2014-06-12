@@ -116,6 +116,5 @@ class UserControllerTest extends TestCase {
     $this->call("DELETE", "users/1");
 
     $this->assertResponseOk();
-
   }
 }

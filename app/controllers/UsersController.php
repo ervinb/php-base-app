@@ -6,8 +6,6 @@ class UsersController extends BaseController {
 
   public function __construct(User $user)
   {
-    $this->beforeFilter('auth', array('except' => 'create'));
-
     $this->user = $user;
   }
 
@@ -21,7 +19,6 @@ class UsersController extends BaseController {
     $this->user->all();
   }
 
-
   /**
    * Show the form for creating a new resource.
    *
@@ -31,7 +28,6 @@ class UsersController extends BaseController {
   {
     return View::make("users.create");
   }
-
 
   /**
    * Store a newly created resource in storage.
@@ -53,7 +49,6 @@ class UsersController extends BaseController {
       ->withErrors($user->errors());
   }
 
-
   /**
    * Display the specified resource.
    *
@@ -65,7 +60,6 @@ class UsersController extends BaseController {
     return $this->user->find($id);
   }
 
-
   /**
    * Show the form for editing the specified resource.
    *
@@ -76,7 +70,6 @@ class UsersController extends BaseController {
   {
     return View::make("users.edit");
   }
-
 
   /**
    * Update the specified resource in storage.
@@ -99,7 +92,6 @@ class UsersController extends BaseController {
       ->withErrors($user->errors());
   }
 
-
   /**
    * Remove the specified resource from storage.
    *
@@ -108,7 +100,7 @@ class UsersController extends BaseController {
    */
   public function destroy($id)
   {
-    $this->user->delete($id);
+    return $this->user->delete($id);
   }
 
 }
