@@ -1,4 +1,4 @@
-## Example application based on Laravel
+## Example application based on the Laravel framework
 
 An example Laravel application used to demonstrate deployment to Heroku with Semaphore.
 
